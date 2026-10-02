@@ -1,337 +1,231 @@
 /**
- * @file js/script.js
- * @brief Handles interactive elements, dynamic content for the unique memory timeline/gallery,
- *        animation triggers (AOS initialization), and overall user experience logic for Opa's birthday website.
+ * js/script.js
+ *
+ * Implements client-side interactivity for the Opa's Birthday Website.
+ * This includes:
+ * - Initialization of AOS (Animate On Scroll) library for smooth scroll animations.
+ * - A 'reveal' mechanism for the personalized birthday letter.
+ * - An interactive confetti burst feature on a 'celebrate' button click.
+ * - A personalized "wish" message revelation.
+ * - A scroll-to-top button for improved navigation.
  */
 
-// Ensure the DOM is fully loaded before executing scripts
 document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Initializes the AOS (Animate On Scroll) library.
-     * @returns {void}
+     * AOS allows for elements to animate as they scroll into view.
+     * Configuration:
+     * - `duration`: Animation duration in milliseconds.
+     * - `once`: Whether animation should happen only once (true) or every time it enters/exits view.
+     * - `offset`: Offset (in px) from the top of the screen to trigger animations.
+     * - `easing`: Specifies the easing function for the animation.
      */
-    function initializeAOS(): void {
-        AOS.init({
-            duration: 1200, // global duration for animations
-            once: true,     // whether animation should happen only once - while scrolling down
-            mirror: false,  // whether elements should animate out while scrolling past them
-        });
-    }
+    AOS.init({
+        duration: 1200, // Longer duration for smoother, less abrupt animations
+        once: true,     // Animations typically happen only once on a birthday site to avoid repetitive distractions
+        offset: 150,    // A bit more generous offset to trigger animations slightly earlier
+        easing: 'ease-in-out', // A smoother easing function for a more polished feel
+    });
 
     /**
-     * Sets up smooth scrolling for all internal anchor links.
-     * @returns {void}
+     * Implements the 'reveal' mechanism for the birthday letter section.
+     * The letter is initially hidden (e.g., using Bootstrap's `d-none` or a custom CSS class)
+     * and revealed with an animation upon a specific button click.
+     * The reveal button is then hidden to prevent repeated actions.
      */
-    function setupSmoothScroll(): void {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
-                e.preventDefault();
+    const revealLetterBtn = document.getElementById('revealLetterBtn');
+    const birthdayLetterSection = document.getElementById('birthdayLetterSection');
 
-                const targetId = this.getAttribute('href');
-                if (targetId) {
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        // Close responsive navbar if open on click
-                        const navbarToggler = document.querySelector('.navbar-toggler') as HTMLElement;
-                        const navbarCollapse = document.getElementById('navbarNav');
-                        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                            // Programmatically click the toggler to close the menu
-                            if (navbarToggler) navbarToggler.click();
-                        }
+    if (revealLetterBtn && birthdayLetterSection) {
+        revealLetterBtn.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default button behavior (e.g., form submission, page reload)
+            try {
+                // Remove the utility class that hides the section
+                birthdayLetterSection.classList.remove('d-none');
+                // Add an animation class for a smooth transition (assumes 'fade-in-up' is defined in styles.css)
+                birthdayLetterSection.classList.add('fade-in-up', 'animated');
+                // Hide the reveal button after the letter is shown
+                revealLetterBtn.classList.add('d-none');
 
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-    }
+                // Scroll smoothly to the revealed letter section for better user experience
+                birthdayLetterSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    /**
-     * Toggles the "read more/less" functionality for personalized letters.
-     * @param {string} letterId - The ID of the letter section (e.g., 'phil-letter', 'amy-letter').
-     * @returns {void}
-     */
-    function setupLetterToggle(letterId: string): void {
-        const letterContent = document.getElementById(`${letterId}-content`);
-        const readMoreBtn = document.getElementById(`${letterId}-read-more-btn`);
-
-        if (letterContent && readMoreBtn) {
-            readMoreBtn.addEventListener('click', () => {
-                if (letterContent.classList.contains('expanded')) {
-                    letterContent.classList.remove('expanded');
-                    readMoreBtn.textContent = 'Mehr lesen';
-                    // Scroll back to the top of the letter snippet if needed, or to the beginning of the section
-                    const section = letterContent.closest('section');
-                    if (section) {
-                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                } else {
-                    letterContent.classList.add('expanded');
-                    readMoreBtn.textContent = 'Weniger lesen';
-                }
-            });
-        }
-    }
-
-    /**
-     * Interface for a Memory object.
-     * @interface Memory
-     */
-    interface Memory {
-        id: string;
-        date: string;
-        title: string;
-        snippet: string; // Short snippet for the timeline card
-        description: string; // Full description for the modal
-        imageUrl: string;
-        videoUrl?: string; // Optional YouTube embed URL
-        author: string;
-    }
-
-    /**
-     * Array of memory objects for the timeline.
-     * @type {Memory[]}
-     */
-    const memories: Memory[] = [
-        {
-            id: 'memory-1',
-            date: '1975',
-            title: 'Dein erstes selbstgebautes Regal',
-            snippet: 'Wir erinnern uns alle an das unglaublich stabile Regal im Wohnzimmer. Ein Meisterwerk deiner Handwerkskunst!',
-            description: 'Dein erstes selbstgebautes Regal im Wohnzimmer war nicht nur ein Möbelstück, sondern ein Symbol deiner Schaffenskraft und deines Talents. Es hat unzählige Bücher und Andenken getragen und war jahrelang ein fester Bestandteil unseres Zuhauses. Jedes Mal, wenn wir es sahen, dachten wir an deine Geduld und Präzision.',
-            imageUrl: 'https://source.unsplash.com/800x600/?carpentry,woodworking,vintagefurniture',
-            author: 'Phil'
-        },
-        {
-            id: 'memory-2',
-            date: '1988',
-            title: 'Unvergessliche Familienurlaube',
-            snippet: 'Die Sommer in den Bergen oder am Meer – du hast uns immer die schönsten Orte gezeigt und die Reise zu einem Abenteuer gemacht.',
-            description: 'Die Familienurlaube, die du organisiert hast, sind in unserer Erinnerung fest verankert. Egal ob in den Alpen, an der Nordsee oder im Schwarzwald – du hast immer dafür gesorgt, dass wir die Welt entdecken und unvergessliche Momente als Familie erleben. Dein Enthusiasmus für Entdeckungen war ansteckend.',
-            imageUrl: 'https://source.unsplash.com/800x600/?family,vintagevacation,mountains',
-            author: 'Amy'
-        },
-        {
-            id: 'memory-3',
-            date: '1995',
-            title: 'Deine erste digitale Kamera',
-            snippet: 'Du warst schon immer technikbegeistert! Wir wissen noch genau, wie stolz du auf deine erste Digitalkamera warst.',
-            description: 'Deine Faszination für Technik war immer beeindruckend. Als du deine erste Digitalkamera bekamst, warst du der Erste, der uns die neue Welt der digitalen Fotografie erklärte. Unzählige Familienfotos und Schnappschüsse wurden dank deiner Neugier und deines Eifers eingefangen.',
-            imageUrl: 'https://source.unsplash.com/800x600/?vintagecamera,photography,technology',
-            videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=i29Wf6eF0B9h-R7V', // Placeholder
-            author: 'Sven'
-        },
-        {
-            id: 'memory-4',
-            date: '2005',
-            title: 'Dein Schrebergarten-Paradies',
-            snippet: 'Dein grüner Daumen ist legendär. Dein Garten war und ist ein echtes Paradies, das du mit viel Liebe pflegst.',
-            description: 'Der Schrebergarten ist dein Reich, ein Ort der Ruhe und Schönheit, den du über Jahrzehnte mit unermüdlicher Leidenschaft gepflegt hast. Die frischen Kräuter, das knackige Gemüse und die farbenfrohen Blumen sind ein Zeugnis deiner Hingabe. Wir lieben es, dort mit dir Zeit zu verbringen und von deiner Erfahrung zu lernen.',
-            imageUrl: 'https://source.unsplash.com/800x600/?gardening,allotment,flowers',
-            author: 'Gloria'
-        },
-        {
-            id: 'memory-5',
-            date: '2012',
-            title: 'Der Ausflug zur alten Burg',
-            snippet: 'Ein Tag voller Geschichten und Abenteuer, als du uns die Geschichte der Region nähergebracht hast.',
-            description: 'Der Ausflug zur alten Burg war mehr als nur eine Besichtigung; es war eine Geschichtsstunde, die lebendig wurde durch deine Erzählungen. Du hast uns gezeigt, wie wichtig es ist, die Vergangenheit zu verstehen und die Spuren unserer Vorfahren zu würdigen. Ein wirklich unvergesslicher Tag.',
-            imageUrl: 'https://source.unsplash.com/800x600/?oldcastle,history,familytrip',
-            author: 'Phil'
-        },
-        {
-            id: 'memory-6',
-            date: '2018',
-            title: 'Deine erste Smartphone-App',
-            snippet: 'Wer hätte gedacht, dass Opa mal eine App benutzt? Du hast uns alle überrascht mit deiner Schnelligkeit, neue Dinge zu lernen.',
-            description: 'Als du dir dein erstes Smartphone zulegtest, dachten wir, es würde eine Weile dauern, bis du dich daran gewöhnt hast. Aber du hast uns alle überrascht! Schnell hast du die ersten Apps gemeistert und sogar selbstständig Videotelefonie genutzt. Dein Lerneifer ist wirklich inspirierend!',
-            imageUrl: 'https://source.unsplash.com/800x600/?smartphone,grandpa,technology',
-            author: 'Amy'
-        },
-        {
-            id: 'memory-7',
-            date: '2023',
-            title: 'Dein 80. Geburtstagspicknick',
-            snippet: 'Ein wunderschöner Tag im Park, umgeben von Familie und Freunden. Ein weiteres Highlight in deinem Leben.',
-            description: 'Das Picknick zum 80. Geburtstag war ein Fest der Liebe und Zusammengehörigkeit. Es war so schön zu sehen, wie viele Menschen dich wertschätzen und wie viel Freude du in unser aller Leben bringst. Wir freuen uns auf viele weitere solcher Momente mit dir!',
-            imageUrl: 'https://source.unsplash.com/800x600/?birthday,picnic,familycelebration',
-            author: 'Sven'
-        }
-    ];
-
-    /**
-     * Renders the memory timeline dynamically.
-     * @returns {void}
-     */
-    function renderMemoryTimeline(): void {
-        const timelineContainer = document.getElementById('memory-timeline-container');
-        const memoryModal = document.getElementById('memoryModal');
-        const modalTitle = document.getElementById('memoryModalLabel');
-        const modalBody = document.querySelector('#memoryModal .modal-body');
-
-        if (!timelineContainer || !memoryModal || !modalTitle || !modalBody) {
-            console.error('Required elements for memory timeline or modal not found.');
-            return;
-        }
-
-        memories.forEach((memory, index) => {
-            const isLeft = index % 2 === 0;
-            const timelineItem = document.createElement('div');
-            timelineItem.classList.add('timeline-item', isLeft ? 'left' : 'right');
-            timelineItem.setAttribute('data-aos', isLeft ? 'fade-right' : 'fade-left');
-            timelineItem.setAttribute('data-aos-delay', (index * 150).toString()); // Staggered animation
-
-            timelineItem.innerHTML = `
-                <div class="timeline-date">${memory.date}</div>
-                <div class="timeline-content card shadow-lg glassmorphism">
-                    <img src="${memory.imageUrl}" class="card-img-top" alt="${memory.title}" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">${memory.title}</h5>
-                        <p class="card-text">${memory.snippet}</p>
-                        <button type="button" class="btn btn-primary btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#memoryModal" data-memory-id="${memory.id}">
-                            Mehr erfahren
-                        </button>
-                    </div>
-                </div>
-            `;
-            timelineContainer.appendChild(timelineItem);
-        });
-
-        // Event listener for opening the memory modal
-        memoryModal.addEventListener('show.bs.modal', (event: Event) => {
-            const button = (event as any).relatedTarget; // Button that triggered the modal
-            const memoryId = button.getAttribute('data-memory-id');
-            const memory = memories.find(m => m.id === memoryId);
-
-            if (memory) {
-                (modalTitle as HTMLElement).textContent = memory.title;
-                (modalBody as HTMLElement).innerHTML = `
-                    <img src="${memory.imageUrl}" class="img-fluid rounded mb-3" alt="${memory.title}" loading="lazy">
-                    <p>${memory.description}</p>
-                    <p class="text-muted small"><em>Erinnerung von: ${memory.author}</em></p>
-                    ${memory.videoUrl ? `
-                        <div class="ratio ratio-16x9 mt-4">
-                            <iframe src="${memory.videoUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
-                        </div>` : ''}
-                `;
+                console.log('Birthday letter revealed successfully.');
+            } catch (error) {
+                console.error('Error revealing birthday letter:', error);
             }
         });
-
-        // Event listener to stop video when modal closes
-        memoryModal.addEventListener('hidden.bs.modal', () => {
-            const iframes = modalBody.querySelectorAll('iframe');
-            iframes.forEach(iframe => {
-                const src = iframe.src;
-                iframe.src = src; // Reloads the iframe, effectively stopping the video
-            });
-        });
+    } else {
+        console.warn('Reveal letter button (ID: revealLetterBtn) or birthday letter section (ID: birthdayLetterSection) not found. The letter reveal mechanism will not function.');
     }
 
     /**
-     * Initializes the sticky navigation bar and active link highlighting.
-     * @returns {void}
+     * Implements the interactive confetti burst feature.
+     * This relies on the `canvas-confetti` library, which is expected to be loaded via CDN in `index.html`.
+     * Triggers a series of visually appealing confetti bursts upon a 'celebrate' button click.
      */
-    function setupStickyNavbar(): void {
-        const header = document.querySelector('header');
-        if (!header) return;
+    const celebrateBtn = document.getElementById('celebrateBtn');
 
-        let lastScrollY = window.scrollY;
+    // Check if the button exists and the confetti library is loaded (global 'confetti' function available)
+    if (celebrateBtn && typeof confetti !== 'undefined') {
+        celebrateBtn.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default button behavior
+            try {
+                // First burst: standard upward burst from the center-bottom
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    origin: { y: 0.6 } // Slightly above the bottom center
+                });
 
-        const handleScroll = () => {
-            if (window.scrollY > 0) {
-                header.classList.add('sticky-top', 'scrolled');
-            } else {
-                header.classList.remove('sticky-top', 'scrolled');
-            }
-
-            // Hide/show navbar on scroll down/up for better mobile UX
-            if (window.scrollY > lastScrollY && window.scrollY > header.offsetHeight) {
-                // Scrolling down, hide header
-                header.classList.add('navbar-hidden');
-            } else {
-                // Scrolling up, show header
-                header.classList.remove('navbar-hidden');
-            }
-            lastScrollY = window.scrollY;
-
-            // Highlight active navigation link
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-
-            sections.forEach(sec => {
-                const top = window.scrollY;
-                const offset = sec.offsetTop - 150; // Adjust offset for better active state
-                const height = sec.offsetHeight;
-                const id = sec.getAttribute('id');
-
-                if (top >= offset && top < offset + height) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('active');
-                        }
+                // Second burst: slightly delayed, originating from the left side
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 100,
+                        angle: 60, // Angle towards the right
+                        spread: 70,
+                        origin: { x: 0, y: 0.8 } // From bottom-left corner
                     });
-                }
-            });
+                }, 200);
+
+                // Third burst: slightly delayed, originating from the right side
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 100,
+                        angle: 120, // Angle towards the left
+                        spread: 70,
+                        origin: { x: 1, y: 0.8 } // From bottom-right corner
+                    });
+                }, 400);
+
+                // Add a brief visual feedback to the button to indicate interaction
+                celebrateBtn.classList.add('btn-clicked');
+                setTimeout(() => {
+                    celebrateBtn.classList.remove('btn-clicked');
+                }, 300);
+
+                console.log('Confetti burst triggered successfully.');
+
+            } catch (error) {
+                // Log an error if the confetti function fails (e.g., due to library issues)
+                console.error('Error triggering confetti:', error);
+            }
+        });
+    } else if (celebrateBtn && typeof confetti === 'undefined') {
+        console.warn('Confetti library (canvas-confetti) not loaded or available. The celebrate button (ID: celebrateBtn) will not trigger confetti.');
+    } else {
+        console.warn('Celebrate button (ID: celebrateBtn) not found. Confetti feature will not be available.');
+    }
+
+    /**
+     * Implements a personalized "wish" message revelation.
+     * A button click reveals a hidden, heartfelt wish message, adding a personal and interactive touch.
+     */
+    const wishButton = document.getElementById('wishButton');
+    const wishMessage = document.getElementById('wishMessage');
+
+    if (wishButton && wishMessage) {
+        wishButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default button behavior
+            try {
+                // Set the personalized message text
+                wishMessage.textContent = "Möge Dein Geburtstag voller Freude, Lachen und unvergesslicher Momente sein! Wir lieben Dich sehr!";
+                // Remove the hidden class to make the message visible
+                wishMessage.classList.remove('d-none');
+                // Add animation classes for a smooth appearance (assumes 'fade-in' is in styles.css)
+                wishMessage.classList.add('fade-in', 'animated');
+                // Hide the button after the wish is revealed to prevent multiple clicks
+                wishButton.classList.add('d-none');
+
+                console.log('Wish message revealed successfully.');
+            } catch (error) {
+                console.error('Error revealing wish message:', error);
+            }
+        });
+    } else {
+        console.warn('Wish button (ID: wishButton) or wish message element (ID: wishMessage) not found. Wish revelation will not function.');
+    }
+
+    /**
+     * Implements a scroll-to-top button for enhanced navigation.
+     * The button appears after the user scrolls down a certain amount and smoothly scrolls the page to the top
+     * when clicked.
+     */
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+    if (scrollToTopBtn) {
+        /**
+         * Event handler for window scroll to control the visibility of the scroll-to-top button.
+         * The button appears when the user scrolls down past a specified threshold.
+         */
+        const handleScrollToTopButtonVisibility = () => {
+            // Show button after scrolling down 400px
+            if (window.scrollY > 400) {
+                scrollToTopBtn.classList.remove('d-none');
+                scrollToTopBtn.classList.add('fade-in-up'); // Animate button appearance (assumes 'fade-in-up' is in CSS)
+            } else {
+                scrollToTopBtn.classList.add('d-none');
+                scrollToTopBtn.classList.remove('fade-in-up');
+            }
         };
 
-        window.addEventListener('scroll', handleScroll);
-        // Trigger once on load to set initial state
-        handleScroll();
-    }
+        // Attach the scroll event listener
+        window.addEventListener('scroll', handleScrollToTopButtonVisibility);
 
-    /**
-     * Initializes the "Back to Top" button functionality.
-     * @returns {void}
-     */
-    function setupBackToTopButton(): void {
-        const backToTopBtn = document.getElementById('back-to-top-btn');
+        // Perform an initial check in case the page is loaded already scrolled (e.g., from a link)
+        handleScrollToTopButtonVisibility();
 
-        if (!backToTopBtn) return;
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) { // Show button after scrolling 300px
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
+        // Add click listener for the scroll-to-top action
+        scrollToTopBtn.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default link/button behavior
+            try {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // Smooth scroll animation for a pleasant user experience
+                });
+                console.log('Scrolled to top of the page.');
+            } catch (error) {
+                console.error('Error scrolling to top:', error);
             }
         });
-
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+    } else {
+        console.warn('Scroll-to-top button (ID: scrollToTopBtn) not found. The scroll-to-top feature will not be available.');
     }
-
-
-    // --- Function Calls ---
-    initializeAOS();
-    setupSmoothScroll();
-    setupLetterToggle('phil-letter');
-    setupLetterToggle('amy-letter');
-    setupLetterToggle('sven-letter');
-    setupLetterToggle('gloria-letter');
-    renderMemoryTimeline();
-    setupStickyNavbar();
-    setupBackToTopButton();
-
-    // Small animation for hero section elements on load using animate.css (if linked)
-    // These classes should be added by default on `index.html` and animate.css handles them
-    // but if not, this ensures they get added for initial animation.
-    const heroTitle = document.querySelector('.hero-content h1');
-    const heroText = document.querySelector('.hero-content p');
-    const heroBtn = document.querySelector('.hero-content .btn');
-
-    // Adding classes dynamically if not already present
-    // Note: It's better to have these in HTML directly for initial load performance
-    // and rely on animate.css for actual animation.
-    if (heroTitle && !heroTitle.classList.contains('animate__animated')) heroTitle.classList.add('animate__animated', 'animate__fadeInDown');
-    if (heroText && !heroText.classList.contains('animate__animated')) heroText.classList.add('animate__animated', 'animate__fadeInUp', 'animate__delay-0-5s');
-    if (heroBtn && !heroBtn.classList.contains('animate__animated')) heroBtn.classList.add('animate__animated', 'animate__zoomIn', 'animate__delay-1s');
-
 });
+
+/**
+ * Simulates a typing effect on a given HTML element.
+ * This function is provided as a utility and can be called if a dynamic typing animation is desired
+ * for a specific text element (e.g., a hero title, a greeting message).
+ *
+ * @param {HTMLElement} element - The target HTML element where the text will be typed.
+ * @param {string} text - The complete string of text to be typed out character by character.
+ * @param {number} [delay=100] - The delay in milliseconds between typing each character. Defaults to 100ms.
+ * @param {Function} [callback=null] - An optional callback function to execute after the typing effect is fully complete.
+ */
+function typeWriterEffect(element, text, delay = 100, callback = null) {
+    let i = 0;
+    // Clear any existing text content from the element
+    element.textContent = '';
+    // Ensure the element is visible (e.g., if it was hidden by CSS opacity: 0)
+    element.style.opacity = '1';
+
+    /**
+     * Recursive helper function to type out characters one by one.
+     */
+    function type() {
+        if (i < text.length) {
+            // Append the next character to the element's text content
+            element.textContent += text.charAt(i);
+            i++;
+            // Schedule the next character to be typed after the specified delay
+            setTimeout(type, delay);
+        } else if (callback) {
+            // If a callback function is provided, execute it once all characters are typed
+            callback();
+        }
+    }
+    // Start the typing effect
+    type();
+}
