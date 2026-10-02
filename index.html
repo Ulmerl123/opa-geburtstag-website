@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alles Liebe zum Geburtstag, Opa!</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- AOS (Animate On Scroll) CSS CDN -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://www.google.com/s2/favicons?domain=https://www.google.com">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#main-navbar" data-bs-offset="100">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="main-navbar">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="#hero">
+                <i class="fas fa-gift me-2"></i> Für unseren lieben Opa
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#messages">Briefe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#timeline">Erinnerungen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Galerie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#surprise">Überraschung</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero-section d-flex align-items-center justify-content-center text-center text-white parallax-bg">
+        <div class="container" data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="display-1 fw-bold mb-4 animated-text-gradient">Alles Liebe zum Geburtstag, Opa!</h1>
+            <p class="lead mb-5 text-shadow-strong">Ein besonderer Tag für einen ganz besonderen Menschen.</p>
+            <a href="#messages" class="btn btn-outline-light btn-lg custom-btn-outline glow-on-hover">
+                <i class="fas fa-scroll me-2"></i> Entdecke deine Botschaften
+            </a>
+            <div class="scroll-down-indicator">
+                <i class="fas fa-chevron-down animated-bounce"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Birthday Messages Section -->
+    <section id="messages" class="py-5 custom-bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4 fw-bold text-gradient-purple" data-aos="fade-down">Herzliche Geburtstagsbriefe</h2>
+            <div class="row g-4">
+                <!-- Phil's Letter -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-right" data-aos-delay="100">
+                    <div class="card h-100 shadow-lg glassmorphism-card hover-lift">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center mb-3 text-gradient-blue"><i class="fas fa-pencil-alt me-2"></i> Von Phil</h5>
+                            <p class="card-text flex-grow-1 text-secondary">
+                                Lieber Opa, zu Deinem Geburtstag sende ich Dir die herzlichsten Glückwünsche! Ich erinnere mich gerne an unsere Angeltouren und all die Geschichten, die Du mir erzählt hast. Deine Weisheit und Dein Humor sind immer eine Inspiration. Bleib so wunderbar, wie Du bist! Alles Liebe, Phil.
+                            </p>
+                            <button class="btn btn-sm btn-outline-primary mt-3 read-more-btn" data-bs-toggle="modal" data-bs-target="#philModal">Mehr lesen</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amy's Letter -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-right" data-aos-delay="200">
+                    <div class="card h-100 shadow-lg glassmorphism-card hover-lift">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center mb-3 text-gradient-pink"><i class="fas fa-heart me-2"></i> Von Amy</h5>
+                            <p class="card-text flex-grow-1 text-secondary">
+                                Mein liebster Opa, herzlichen Glückwunsch zum Geburtstag! Du bist mein Fels in der Brandung, und ich schätze unsere gemeinsamen Kaffeestunden und tiefgründigen Gespräche über alles. Dein liebevolles Herz und Deine Fürsorge bedeuten mir die Welt. In Liebe, Amy.
+                            </p>
+                            <button class="btn btn-sm btn-outline-primary mt-3 read-more-btn" data-bs-toggle="modal" data-bs-target="#amyModal">Mehr lesen</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sven's Letter -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-left" data-aos-delay="300">
+                    <div class="card h-100 shadow-lg glassmorphism-card hover-lift">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center mb-3 text-gradient-green"><i class="fas fa-comment-dots me-2"></i> Von Sven</h5>
+                            <p class="card-text flex-grow-1 text-secondary">
+                                Alles Gute zum Geburtstag, Opa! Deine Abenteuergeschichten waren immer mein Highlight als Kind, und ich bewundere Deine Lebensfreude und Deinen unermüdlichen Tatendrang. Ich freue mich auf viele weitere gemeinsame Momente. Herzliche Grüße, Sven.
+                            </p>
+                            <button class="btn btn-sm btn-outline-primary mt-3 read-more-btn" data-bs-toggle="modal" data-bs-target="#svenModal">Mehr lesen</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gloria's Letter -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-left" data-aos-delay="400">
+                    <div class="card h-100 shadow-lg glassmorphism-card hover-lift">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center mb-3 text-gradient-orange"><i class="fas fa-star me-2"></i> Von Gloria</h5>
+                            <p class="card-text flex-grow-1 text-secondary">
+                                Lieber Opa, alles Gute zum Geburtstag! Ich bin so dankbar für all die Wärme und Geborgenheit, die Du mir schenkst. Deine Umarmungen sind die besten! Ich wünsche Dir einen wunderschönen Tag voller Freude und Lachen. Deine Gloria.
+                            </p>
+                            <button class="btn btn-sm btn-outline-primary mt-3 read-more-btn" data-bs-toggle="modal" data-bs-target="#gloriaModal">Mehr lesen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals for full letters -->
+    <!-- Phil Modal -->
+    <div class="modal fade" id="philModal" tabindex="-1" aria-labelledby="philModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content glassmorphism-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title text-gradient-blue" id="philModalLabel">Brief von Phil</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-light">
+                    <p>
+                        Lieber Opa,
+                    </p>
+                    <p>
+                        zu Deinem Geburtstag sende ich Dir die herzlichsten Glückwünsche und wünsche Dir einen wundervollen Tag voller Freude, guter Gesellschaft und allem, was Dein Herz begehrt.
+                    </p>
+                    <p>
+                        Ich erinnere mich gerne an all die Stunden, die wir zusammen verbracht haben. Ob es die Angeltouren am See waren, bei denen Du mir geduldig gezeigt hast, wie man den Köder auswirft und geduldig auf den Fang wartet, oder die langen Abende, an denen Du mir unzählige Geschichten aus Deinem Leben erzählt hast – jede Erinnerung ist ein Schatz.
+                    </p>
+                    <p>
+                        Deine Weisheit, Dein unerschütterlicher Optimismus und Dein trockener Humor sind für mich immer eine Quelle der Inspiration gewesen. Du hast mir gezeigt, wie man mit Herausforderungen umgeht und das Leben in vollen Zügen genießt.
+                    </p>
+                    <p>
+                        Bleib so vital, so neugierig und so wunderbar, wie Du bist. Ich freue mich auf viele weitere gemeinsame Jahre und neue Abenteuer mit Dir.
+                    </p>
+                    <p>
+                        Alles Liebe und Gute zu Deinem Ehrentag!
+                    </p>
+                    <p>
+                        Dein Phil
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary custom-btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Amy Modal -->
+    <div class="modal fade" id="amyModal" tabindex="-1" aria-labelledby="amyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content glassmorphism-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title text-gradient-pink" id="amyModalLabel">Brief von Amy</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-light">
+                    <p>
+                        Mein liebster Opa,
+                    </p>
+                    <p>
+                        herzlichen Glückwunsch zu Deinem Geburtstag! Ich hoffe, Du hast einen wunderschönen Tag, der so strahlend und voller Liebe ist wie Du selbst.
+                    </p>
+                    <p>
+                        Du bist mein Fels in der Brandung, ein Ruhepol in einer manchmal stürmischen Welt. Ich schätze unsere gemeinsamen Kaffeestunden, in denen wir über Gott und die Welt reden können, über meine Träume und Ängste, und Du mir immer mit offenem Ohr und weisem Rat zur Seite stehst. Diese tiefgründigen Gespräche bedeuten mir alles.
+                    </p>
+                    <p>
+                        Dein liebevolles Herz, Deine Fürsorge und die Art, wie Du uns alle zusammenhältst, sind ein Geschenk. Du hast immer ein Lächeln und eine Umarmung bereit, und Deine Präsenz allein macht jeden Raum heller.
+                    </p>
+                    <p>
+                        Ich bin so unendlich dankbar, Dich in meinem Leben zu haben. Mögen all Deine Wünsche in Erfüllung gehen und das kommende Jahr Dir viel Gesundheit, Glück und Zufriedenheit bringen.
+                    </p>
+                    <p>
+                        In tiefster Liebe,
+                    </p>
+                    <p>
+                        Deine Amy
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary custom-btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sven Modal -->
+    <div class="modal fade" id="svenModal" tabindex="-1" aria-labelledby="svenModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content glassmorphism-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title text-gradient-green" id="svenModalLabel">Brief von Sven</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-light">
+                    <p>
+                        Alles Gute zum Geburtstag, Opa!
+                    </p>
+                    <p>
+                        Ich hoffe, Du lässt es heute richtig krachen und genießt Deinen Ehrentag in vollen Zügen.
+                    </p>
+                    <p>
+                        Deine Abenteuergeschichten waren immer mein Highlight als Kind – ob es die Erzählungen von Deinen Reisen, Deinen Erlebnissen im Beruf oder einfach nur Deine witzigen Anekdoten aus dem Alltag waren. Du hast immer gewusst, wie man Spannung aufbaut und uns in den Bann zieht.
+                    </p>
+                    <p>
+                        Ich bewundere Deine unermüdliche Lebensfreude und Deinen Tatendrang. Du bist der Beweis dafür, dass das Leben in jedem Alter spannend und voller Möglichkeiten ist. Dein Optimismus ist ansteckend, und Deine Fähigkeit, immer das Positive zu sehen, inspiriert mich jeden Tag.
+                    </p>
+                    <p>
+                        Ich freue mich auf viele weitere gemeinsame Momente, sei es beim Schrauben in der Garage, beim Spaziergang im Wald oder einfach nur beim gemütlichen Beisammensein.
+                    </p>
+                    <p>
+                        Hab einen fantastischen Geburtstag!
+                    </p>
+                    <p>
+                        Herzliche Grüße,
+                    </p>
+                    <p>
+                        Dein Sven
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary custom-btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gloria Modal -->
+    <div class="modal fade" id="gloriaModal" tabindex="-1" aria-labelledby="gloriaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content glassmorphism-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title text-gradient-orange" id="gloriaModalLabel">Brief von Gloria</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-light">
+                    <p>
+                        Lieber Opa,
+                    </p>
+                    <p>
+                        alles Gute zum Geburtstag! Ich hoffe, Dein Tag ist genauso wundervoll und strahlend wie Du selbst.
+                    </p>
+                    <p>
+                        Ich bin so dankbar für all die Wärme und Geborgenheit, die Du mir schenkst. Deine Umarmungen sind die besten der Welt, und ich fühle mich bei Dir immer sicher und geliebt. Du hast immer ein offenes Ohr, ein tröstendes Wort und ein Lächeln, das mein Herz erwärmt.
+                    </p>
+                    <p>
+                        Die Erinnerungen an unsere gemeinsamen Back-Nachmittage, die Spaziergänge im Park und die vielen kleinen Abenteuer, die wir zusammen erlebt haben, sind für mich unbezahlbar. Du hast mir gezeigt, wie wichtig es ist, die kleinen Dinge im Leben zu schätzen und Freude an jedem Tag zu finden.
+                    </p>
+                    <p>
+                        Ich wünsche Dir einen wunderschönen Tag voller Freude, Lachen und allem, was Dich glücklich macht. Bleib gesund und munter, damit wir noch viele weitere schöne Momente teilen können.
+                    </p>
+                    <p>
+                        Ich hab Dich ganz doll lieb!
+                    </p>
+                    <p>
+                        Deine Gloria
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary custom-btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memory Timeline Section -->
+    <section id="timeline" class="py-5 custom-bg-dark text-white">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4 fw-bold text-gradient-yellow" data-aos="fade-down">Eine Reise durch die Zeit: Unsere schönsten Erinnerungen</h2>
+            <div class="timeline">
+                <!-- Timeline items will be dynamically loaded here by script.js -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glassmorphism-card hover-lift p-4">
+                        <h4 class="timeline-title text-gradient-blue">1970er - Die Anfänge</h4>
+                        <img src="https://source.unsplash.com/800x600/?vintage,family" class="img-fluid rounded mb-3 shadow" alt="Vintage Family Photo">
+                        <p class="text-secondary">Erste Familienausflüge, die Geburt von Kindern, die Grundsteine für eine wundervolle Familie wurden gelegt.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glassmorphism-card hover-lift p-4">
+                        <h4 class="timeline-title text-gradient-pink">1990er - Enkelkinder kommen</h4>
+                        <img src="https://source.unsplash.com/800x600/?grandparents,grandchildren" class="img-fluid rounded mb-3 shadow" alt="Grandparents and Grandchildren">
+                        <p class="text-secondary">Die Familie wächst! Opa lernt die erste Generation seiner Enkelkinder kennen. Eine neue Ära voller Lachen und Freude beginnt.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glassmorphism-card hover-lift p-4">
+                        <h4 class="timeline-title text-gradient-green">2010er - Gemeinsame Reisen</h4>
+                        <img src="https://source.unsplash.com/800x600/?travel,europe" class="img-fluid rounded mb-3 shadow" alt="Family Traveling">
+                        <p class="text-secondary">Unvergessliche Familienurlaube und Entdeckungsreisen, die Opa mit seinen Liebsten unternahm. Jede Reise ein Abenteuer.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glassmorphism-card hover-lift p-4">
+                        <h4 class="timeline-title text-gradient-orange">Heute - Feiern und Genießen</h4>
+                        <img src="https://source.unsplash.com/800x600/?birthday,celebration" class="img-fluid rounded mb-3 shadow" alt="Birthday Celebration">
+                        <p class="text-secondary">Wir feiern Dich, Opa! Jeder Tag ist ein Geschenk, und wir sind dankbar für jede Sekunde mit Dir.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <button id="loadMoreMemories" class="btn custom-btn-outline glow-on-hover animate__animated animate__pulse animate__infinite">
+                    <i class="fas fa-plus-circle me-2"></i> Weitere Erinnerungen entdecken
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="py-5 custom-bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4 fw-bold text-gradient-blue" data-aos="fade-down">Unsere schönsten Momente in Bildern</h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="image-gallery">
+                <!-- Gallery items will be dynamically loaded here by script.js, or some static examples -->
+                <div class="col" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card h-100 shadow gallery-card hover-zoom">
+                        <img src="https://source.unsplash.com/800x600/?family,laughing" class="card-img-top img-fluid" alt="Lachende Familie">
+                        <div class="card-body text-center glassmorphism-light p-3">
+                            <p class="card-text mb-0 text-dark fw-bold">Unvergessliches Lachen</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card h-100 shadow gallery-card hover-zoom">
+                        <img src="https://source.unsplash.com/800x600/?grandparents,hiking" class="card-img-top img-fluid" alt="Wanderung mit Opa">
+                        <div class="card-body text-center glassmorphism-light p-3">
+                            <p class="card-text mb-0 text-dark fw-bold">Abenteuer in den Bergen</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card h-100 shadow gallery-card hover-zoom">
+                        <img src="https://source.unsplash.com/800x600/?cooking,grandma" class="card-img-top img-fluid" alt="Gemeinsam Kochen">
+                        <div class="card-body text-center glassmorphism-light p-3">
+                            <p class="card-text mb-0 text-dark fw-bold">Kulinarische Momente</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="card h-100 shadow gallery-card hover-zoom">
+                        <img src="https://source.unsplash.com/800x600/?fishing,sunset" class="card-img-top img-fluid" alt="Angeln im Sonnenuntergang">
+                        <div class="card-body text-center glassmorphism-light p-3">
+                            <p class="card-text mb-0 text-dark fw-bold">Stille am Wasser</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="card h-100 shadow gallery-card hover-zoom">
+                        <img src="https://source.unsplash.com/800x600/?reading,fireplace" class="card-img-top img-fluid" alt="Gemütliche Lesestunden">
+                        <div class="card-body text-center glassmorphism-light p-3">
+                            <p class="card-text mb-0 text-dark fw-bold">Entspannung am Kamin</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="card h-100 shadow gallery-card hover-zoom">
+                        <img src="https://source.unsplash.com/800x600/?gardening,flowers" class="card-img-top img-fluid" alt="Gartenarbeit">
+                        <div class="card-body text-center glassmorphism-light p-3">
+                            <p class="card-text mb-0 text-dark fw-bold">Blühende Leidenschaft</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <button id="loadMorePhotos" class="btn custom-btn-outline glow-on-hover animate__animated animate__pulse animate__infinite">
+                    <i class="fas fa-images me-2"></i> Mehr Fotos laden
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unique Feature Section: The "Memory Jar" -->
+    <section id="surprise" class="py-5 custom-bg-dark text-white text-center">
+        <div class="container">
+            <h2 class="mb-5 display-4 fw-bold text-gradient-red" data-aos="fade-down">Dein Persönliches Erinnerungsglas</h2>
+            <p class="lead mb-5 text-shadow-strong" data-aos="fade-up" data-aos-delay="200">
+                Jedes Familienmitglied hat eine kleine Botschaft für Dich hinterlegt. Klicke auf das Glas, um eine zufällige Erinnerung oder einen Wunsch zu entdecken!
+            </p>
+            <div class="memory-jar-container" data-aos="zoom-in" data-aos-delay="400">
+                <img src="https://images.unsplash.com/photo-1549405615-59b3a72d4c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Memory Jar" id="memoryJar" class="img-fluid memory-jar-img cursor-pointer glow-on-hover animate__animated animate__heartBeat animate__delay-2s animate__infinite" style="max-width: 300px;">
+                <p class="mt-4 text-light text-shadow-strong">Klick mich!</p>
+            </div>
+
+            <!-- Memory Display Modal -->
+            <div class="modal fade" id="memoryModal" tabindex="-1" aria-labelledby="memoryModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content glassmorphism-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-gradient-purple" id="memoryModalLabel">Eine Erinnerung für Dich!</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-light">
+                            <p id="memoryText" class="lead"></p>
+                            <p class="small text-muted" id="memoryAuthor"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary custom-btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                            <button type="button" class="btn btn-primary custom-btn-primary" id="nextMemoryBtn">Nächste Erinnerung</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Video Section (Optional) -->
+    <section class="py-5 custom-bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4 fw-bold text-gradient-pink" data-aos="fade-down">Ein Lied nur für Dich, Opa!</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="ratio ratio-16x9 shadow-lg rounded-3 border border-3 border-secondary">
+                        <!-- Embed a suitable cheerful or meaningful song/video -->
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&controls=1&mute=0" title="Ein Geburtstagslied" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p class="text-center text-muted mt-3">Wir hoffen, dieses Lied bringt Dir Freude und lässt Dich schmunzeln!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action / Footer -->
+    <footer class="py-5 custom-bg-dark text-white text-center">
+        <div class="container">
+            <h3 class="mb-4 text-gradient-blue" data-aos="fade-up">Wir lieben Dich, Opa!</h3>
+            <p class="lead mb-4 text-shadow-strong" data-aos="fade-up" data-aos-delay="100">
+                Mögest Du weiterhin viele glückliche und gesunde Jahre erleben, umgeben von Deiner Familie und Freunden.
+            </p>
+            <div class="social-links mb-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="#" class="text-white mx-3 fs-3 hover-scale"><i class="fab fa-facebook-square"></i></a>
+                <a href="#" class="text-white mx-3 fs-3 hover-scale"><i class="fab fa-instagram-square"></i></a>
+                <a href="#" class="text-white mx-3 fs-3 hover-scale"><i class="fas fa-envelope-square"></i></a>
+            </div>
+            <p class="small text-muted mb-0" data-aos="fade-up" data-aos-delay="300">&copy; 2024 Deine Familie. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN (Bundle includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- AOS JS CDN -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
